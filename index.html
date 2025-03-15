@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Pro | Comece sua jornada fitness</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --secondary: #4895ef;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --radius-lg: 24px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            box-shadow: var(--shadow-md);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .app-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 80px 0;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-color: rgba(67, 97, 238, 0.05);
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--dark);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            flex: 1 1 200px;
+        }
+        
+        .benefit-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        /* Registration Form */
+        .registration-card {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            max-width: 450px;
+            margin-left: auto;
+        }
+        
+        .reg-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .reg-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .reg-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .reg-body {
+            padding: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+        
+        .input-addon {
+            position: relative;
+        }
+        
+        .input-addon .input-field {
+            padding-right: 40px;
+        }
+        
+        .input-addon-text {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark);
+            opacity: 0.5;
+        }
+        
+        .form-action {
+            margin-top: 30px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 14px;
+        }
+        
+        .privacy-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--dark);
+            opacity: 0.7;
+            margin-top: 15px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 30px;
+            height: 100%;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            background: var(--primary-gradient);
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--dark);
+            opacity: 0.8;
+        }
+        
+        /* Success Stories */
+        .success-stories {
+            padding: 100px 0;
+            background-color: rgba(67, 97, 238, 0.03);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 30px;
+            height: 100%;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-info p {
+            font-size: 0.9rem;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        .testimonial-quote {
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary);
+            font-style: italic;
+            color: var(--dark);
+            opacity: 0.8;
+        }
+        
+        .testimonial-results {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .result-item {
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .result-label {
+            font-size: 0.8rem;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-description {
+            max-width: 300px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: white;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Adaptations */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .registration-card {
+                margin: 40px auto 0;
+            }
+            
+            .hero-bg {
+                width: 100%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+                opacity: 0.3;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .benefit-item {
+                flex: 1 1 100%;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .features, .success-stories {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .registration-card {
+                border-radius: var(--radius);
+            }
+            
+            .reg-header {
+                padding: 20px;
+            }
+            
+            .reg-body {
+                padding: 20px;
+            }
+        }
+        
+        /* Progress Bar Styling */
+        .progress-bar-wrapper {
+            height: 8px;
+            background-color: rgba(0,0,0,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-gradient);
+            width: 25%;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Transforme seu corpo e sua saúde com FitTrack Pro</h1>
+                            <p class="hero-subtitle">Monitore seus progressos, estabeleça metas personalizadas e receba orientações de especialistas, tudo em um único aplicativo.</p>
+                            
+                            <div class="hero-buttons">
+                                <a href="#registration-form" class="btn btn-primary">Comece Agora - É Grátis</a>
+                            </div>
+                            
+                            <div class="hero-benefits">
+                                <div class="benefit-item">
+                                    <i class="fas fa-chart-line benefit-icon"></i>
+                                    <span>Análise personalizada</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-users benefit-icon"></i>
+                                    <span>Comunidade de apoio</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-mobile-alt benefit-icon"></i>
+                                    <span>Acompanhamento diário</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-shield-alt benefit-icon"></i>
+                                    <span>Dados 100% seguros</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="registration-card" id="registration-form">
+                            <div class="reg-header">
+                                <h3>Comece sua jornada fitness</h3>
+                                <p>Preencha os dados abaixo para criar sua conta gratuita</p>
+                            </div>
+                            
+                            <div class="reg-body">
+                                <div class="progress-bar-wrapper">
+                                    <div class="progress-bar" id="progress-bar"></div>
+                                </div>
+                                
+                                <form id="registration-form-element">
+                                    <div id="step-1" class="form-step active">
+                                        <div class="input-group">
+                                            <label for="birthdate">Data de Nascimento</label>
+                                            <input type="date" id="birthdate" class="input-field" required>
+                                        </div>
+                                        
+                                        <div class="form-action">
+                                            <button type="button" class="btn btn-primary btn-submit" id="next-step-1">Continuar</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="step-2" class="form-step" style="display: none;">
+                                        <div class="input-group">
+                                            <label for="weight">Peso Atual (kg)</label>
+                                            <div class="input-addon">
+                                                <input type="number" id="weight" class="input-field" min="30" max="250" step="0.1" placeholder="Ex: 75.5" required>
+                                                <span class="input-addon-text">kg</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-action">
+                                            <button type="button" class="btn btn-primary btn-submit" id="next-step-2">Continuar</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="step-3" class="form-step" style="display: none;">
+                                        <div class="input-group">
+                                            <label for="height">Altura (cm)</label>
+                                            <div class="input-addon">
+                                                <input type="number" id="height" class="input-field" min="100" max="250" placeholder="Ex: 175" required>
+                                                <span class="input-addon-text">cm</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-action">
+                                            <button type="button" class="btn btn-primary btn-submit" id="next-step-3">Continuar</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="step-4" class="form-step" style="display: none;">
+                                        <div class="input-group">
+                                            <label for="whatsapp">WhatsApp</label>
+                                            <div class="input-addon">
+                                                <input type="tel" id="whatsapp" class="input-field" placeholder="(00) 00000-0000" required>
+                                                <span class="input-addon-text"><i class="fab fa-whatsapp"></i></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-action">
+                                            <button type="submit" class="btn btn-primary btn-submit">Criar Minha Conta</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <p class="privacy-note">Ao se cadastrar você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Como o FitTrack Pro transforma sua jornada fitness</h2>
+                    <p>Nosso aplicativo reúne tudo o que você precisa para alcançar seus objetivos de saúde e bem-estar</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <h3 class="feature-title">Métricas Personalizadas</h3>
+                            <p class="feature-description">Acompanhe seu progresso com métricas adaptadas às suas metas e necessidades específicas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h3 class="feature-title">Planos de Treino</h3>
+                            <p class="feature-description">Acesse programas de treino elaborados por especialistas e adaptados ao seu perfil.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                            <h3 class="feature-title">Nutrição Inteligente</h3>
+                            <p class="feature-description">Receba sugestões de alimentação baseadas no seu perfil e objetivos de saúde.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="feature-title">Comunidade Ativa</h3>
+                            <p class="feature-description">Conecte-se com outros usuários para compartilhar experiências e manter a motivação.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h3 class="feature-title">Desafios e Recompensas</h3>
+                            <p class="feature-description">Participe de desafios para manter a motivação e ganhe recompensas pelo seu progresso.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="feature-title">Análise Avançada</h3>
+                            <p class="feature-description">Nossa IA analisa seus dados para oferecer insights personalizados sobre seu progresso.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="success-stories">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Histórias de Sucesso</h2>
+                    <p>Veja como nossos usuários transformaram suas vidas com o FitTrack Pro</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">CP</div>
+                                <div class="testimonial-info">
+                                    <h4>Carlos Pereira</h4>
+                                    <p>Usuário há 6 meses</p>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial-quote">
+                                <p>"O FitTrack Pro mudou completamente minha relação com exercícios. A facilidade de acompanhar meu progresso me manteve motivado. Perdi 12kg e ganhei muito mais disposição!"</p>
+                            </div>
+                            
+                            <div class="testimonial-results">
+                                <div class="result-item">
+                                    <div class="result-value">-12kg</div>
+                                    <div class="result-label">Peso</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-value">-8%</div>
+                                    <div class="result-label">Gordura</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-value">+5kg</div>
+                                    <div class="result-label">Músculo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">MS</div>
+                                <div class="testimonial-info">
+                                    <h4>Marina Silva</h4>
+                                    <p>Usuária há 8 meses</p>
+                                </div>
+                            </div>
+                            
+                            <div class="testimonial-quote">
+                                <p>"Como profissional ocupada, sempre tive dificuldade em manter uma rotina de exercícios. O app me ajudou a criar um plano realista e os lembretes me mantêm no caminho certo!"</p>
+                            </div>
+                            
+                            <div class="testimonial-results">
+                                <div class="result-item">
+                                    <div class="result-value">+120%</div>
+                                    <div class="result-label">Atividade</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-value">-15cm</div>
+                                    <div class="result-label">Cintura</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-value">+45%</div>
+                                    <div class="result-label">Energia</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>FitTrack Pro</span>
+                    </div>
+                    <p class="footer-description">Transforme seu corpo, melhore sua saúde e alcance seus objetivos fitness com nossa plataforma de acompanhamento personalizado.</p>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-heading">Empresa</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre nós</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Imprensa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-heading">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Guias</a></li>
+                        <li><a href="#">Vídeos</a></li>
+                        <li><a href="#">Calculadoras</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Licenças</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-heading">Contato</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Suporte</a></li>
+                        <li><a href="#">Vendas</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Mídia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FitTrack Pro. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    
+    <script>
+        // Função para formatar telefone no padrão brasileiro
+        function formatPhone(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            
+            if (value.length > 2) {
+                value = '(' + value.substring(0, 2) + ')' + (value.length > 2 ? ' ' + value.substring(2) : '');
+            }
+            
+            if (value.length > 8) {
+                value = value.substring(0, 9) + '-' + value.substring(9);
+            }
+            
+            input.value = value;
+        }
+        
+        // Multi-step form navigation
+        $(document).ready(function() {
+            // Inicialização do formulário
+            const progressBar = $('#progress-bar');
+            const formSteps = $('.form-step');
+            let currentStep = 1;
+            const totalSteps = formSteps.length;
+            
+            // Função para atualizar a barra de progresso
+            function updateProgressBar() {
+                const progressPercentage = (currentStep / totalSteps) * 100;
+                progressBar.css('width', progressPercentage + '%');
+            }
+            
+            // Função para exibir o passo atual
+            function showStep(stepNumber) {
+                formSteps.hide();
+                $('#step-' + stepNumber).show();
+                currentStep = stepNumber;
+                updateProgressBar();
+            }
+            
+            // Navegação entre passos
+            $('#next-step-1').click(function() {
+                const birthdate = $('#birthdate').val();
+                if (birthdate) {
+                    showStep(2);
+                } else {
+                    alert('Por favor, informe sua data de nascimento');
+                }
+            });
+            
+            $('#next-step-2').click(function() {
+                const weight = $('#weight').val();
+                if (weight && weight >= 30 && weight <= 250) {
+                    showStep(3);
+                } else {
+                    alert('Por favor, informe um peso válido entre 30 e 250 kg');
+                }
+            });
+            
+            $('#next-step-3').click(function() {
+                const height = $('#height').val();
+                if (height && height >= 100 && height <= 250) {
+                    showStep(4);
+                } else {
+                    alert('Por favor, informe uma altura válida entre 100 e 250 cm');
+                }
+            });
+            
+            // Formatação do campo de WhatsApp
+            $('#whatsapp').on('input', function() {
+                formatPhone(this);
+            });
+            
+            // Submissão do formulário
+            $('#registration-form-element').submit(function(e) {
+                e.preventDefault();
+                
+                const whatsapp = $('#whatsapp').val();
+                if (!whatsapp || whatsapp.length < 14) {
+                    alert('Por favor, informe um número de WhatsApp válido');
+                    return;
+                }
+                
+                // Coleta os dados do formulário
+                const userData = {
+                    birthdate: $('#birthdate').val(),
+                    weight: $('#weight').val(),
+                    height: $('#height').val(),
+                    whatsapp: whatsapp
+                };
+                
+                // Aqui você adicionaria o código para enviar os dados para seu servidor
+                console.log('Dados coletados:', userData);
+                
+                // Exemplo de feedback visual para o usuário
+                // Na implementação real, isso seria mostrado após resposta do servidor
+                showSuccessMessage();
+            });
+            
+            function showSuccessMessage() {
+                // Esconde o formulário e mostra mensagem de sucesso
+                $('.reg-body').html(`
+                    <div class="text-center py-4">
+                        <div style="color: var(--success); font-size: 3rem; margin-bottom: 1rem;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 style="margin-bottom: 1rem;">Cadastro realizado com sucesso!</h3>
+                        <p>Enviamos um link de acesso para seu WhatsApp.</p>
+                        <p style="margin-top: 2rem;">
+                            <a href="#" class="btn btn-primary">
+                                <i class="fab fa-whatsapp"></i> Abrir WhatsApp
+                            </a>
+                        </p>
+                    </div>
+                `);
+            }
+            
+            // Mostra o primeiro passo
+            showStep(1);
+        });
+        
+        // Adiciona a análise do IMC e visualização de dados
+        $(document).ready(function() {
+            // Para uma implementação futura, aqui você poderia adicionar
+            // uma visualização com Chart.js quando o usuário inserir altura e peso
+            
+            // Exemplo de como seria a implementação:
+            $('#next-step-3').click(function() {
+                const weight = parseFloat($('#weight').val());
+                const height = parseFloat($('#height').val()) / 100; // cm para metros
+                
+                if (weight && height) {
+                    const bmi = weight / (height * height);
+                    // Aqui você poderia renderizar um gráfico com Chart.js
+                    // mostrando onde o usuário está na escala de IMC
+                    console.log('IMC calculado:', bmi.toFixed(2));
+                }
+            });
+        });
+    </script>
